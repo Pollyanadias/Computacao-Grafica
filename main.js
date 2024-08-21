@@ -6,9 +6,11 @@ let vel_t = 0.1;*/
 
 class Cube{
 	constructor(cube){
-		this.vel_h = 0.05;
-		this.vel_v = 0.02;
-		this.vel_t = 0.03;
+		let min = -0.1;
+		let max = 0.1;
+		this.vel_h = min + (max - min) * Math.random();
+		this.vel_v = min + (max - min) * Math.random();
+		this.vel_t = min + (max - min) * Math.random();
 		this.cube = cube;
 	}
 
@@ -37,17 +39,25 @@ document.body.appendChild( renderer.domElement );
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true} );
-const cube = new Cube (new THREE.Mesh( geometry, material ));
+
+let cubes = [];
+
+for (let i = 0; i < 2; i++){
+	const cube = new Cube (new THREE.Mesh( geometry, material ));
+	scene.add( cube.cube );
+	cubes.push(cube);
+}
 //const cube = new THREE.Mesh( geometry, material);
 //scene.add(cube);
-scene.add( cube.cube );
+
 
 camera.position.z = 5;
 
 function animate() {
 	renderer.render( scene, camera );
 
-	cube.update(cube);
+	for (var cube of cubes)
+		cube.update();
 	/*
 	cube.position.x += vel_h;
 	cube.position.y += vel_v;
