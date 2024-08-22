@@ -41,6 +41,7 @@ let cubes = [];
 const m = 10;
 const n = 10;
 const deltaX = 0.3;
+const deltaY = 0.3;
 let side = 1.0;
 let offset = ((m - 1) * (deltaX + side)) / 2.0;
 
@@ -50,7 +51,7 @@ for (let j = 0; j < n; j++) {
 		const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
 		const cube = new THREE.Mesh(geometry, material);
 		cube.position.x = i * (side + deltaX) - offset;
-		cube.position.y = j * (side + deltaX) - offset;
+		cube.position.y = j * (side + deltaY) - offset;
 		scene.add(cube);
 		cubes.push(cube);
 	}
