@@ -7,20 +7,22 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-let n = 50;
+let n = 20;
+let m = 20;
 
-for (let j = 0; j < 4; j++) {
+for (let j = 0; j < m; j++) {
 	for (let i = 0; i < n; i++) {
 		const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
 		const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
 		const cube = new THREE.Mesh(geometry, material);
 
 		let r = 3;
-		let theta = 2.0 * Math.PI * i / n;
+		let theta = 2.0 * Math.PI * j / m;
+		let phi = Math.PI * i / n;
 
-		cube.position.x = r * Math.cos (theta);
-		cube.position.y = r * Math.sin (theta);
-		cube.position.z = j - 1;
+		cube.position.x = r * Math.sin (phi) * Math.sin (theta);
+		cube.position.y = r * Math.cos (phi);
+		cube.position.z = r * Math.sin (phi) * Math.cos (theta);
 		
 		scene.add(cube);
 	}
