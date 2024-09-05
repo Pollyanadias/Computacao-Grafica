@@ -18,6 +18,7 @@ scene.add( light );
 
 // Instantiate a loader
 const loader = new GLTFLoader();
+let model = null;
 
 // Load a glTF resource
 loader.load(
@@ -27,6 +28,7 @@ loader.load(
 	function ( gltf ) {
 
 		scene.add( gltf.scene );
+		model = gltf.scene.children[0];
 
 		gltf.animations; // Array<THREE.AnimationClip>
 		gltf.scene; // THREE.Group
@@ -53,6 +55,13 @@ camera.position.z = 5;
 
 function animate() {
 	renderer.render( scene, camera );
+
+	if (model != null){
+		model.rotation.x += 0.05;
+		model.rotation.y += 0.03;
+		model.rotation.z -= 0.1;
+	}
+
 	cube.rotation.x += 0.01;
 	cube.rotation.y += 0.01;
 }
